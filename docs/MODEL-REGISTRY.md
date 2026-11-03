@@ -19,10 +19,11 @@ Catatan penting (F31): jalur **`cline-pass/<model>`** = langganan; ID vendor
 
 | Agent | Model utama | Fallback | Catatan |
 |-------|-------------|----------|---------|
-| ELAS Coordinator | OpenRouter `:free` (mis. nemotron-inkling class) | `cline-pass/mimo-v2.6-flash` | Tugas ringan: routing/ringkasan |
-| Developer (×2–3) | OpenRouter `:free` (mis. `nvidia/nemotron-3.5-super-vl:free`) | `cline-pass/mimo-v2.6-flash` | Volume tinggi → free dulu |
-| QA | OpenRouter `:free` (mis. `thinkingmachines/inkling:free`) | `cline-pass/deepseek-v4.1-flash-1017` | Review butuh ketelitian |
-| DevOps/Security | `cline-pass/mimo-v2.6-pro` | `cline-pass/mimo-v2.6-flash` | Analisis berat (reasoning) |
+| ELAS Coordinator | OpenRouter `:free` (`opencode/beam-free`) | `cline-pass/mimo-v2.6-flash` | Tugas ringan: routing/ringkasan |
+| Developer (×2–3) | OpenRouter `:free` (`opencode/beam-free`) | `cline-pass/mimo-v2.6-flash` | Volume tinggi → free dulu |
+| QA | OpenRouter `:free` (`opencode/beam-free`) | `cline-pass/deepseek-v4.1-flash-1017` | Review butuh ketelitian |
+| DevOps/Security | `opencode/beam-free` | `cline-pass/mimo-v2.6-flash` | Analisis berat (reasoning) |
+**Catatan**: Model `opencode/beam-free` dipilih sebagai default free model karena lebih cepat dari `nemotron-3.5-super-vl-free`. Jika `beam-free` tidak tersedia, fallback ke `nemotron-3.5-lightning-free`.
 
 **Aturan penempatan model kustom** (F34): model provider kustom wajib terdaftar
 di blok `models` `opencode-global.json` — `OPENCODE_ALLOW_ALL_MODELS` saja

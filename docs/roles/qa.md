@@ -36,6 +36,9 @@ Profile OpenCode: `elas-qa` (read-only + runner) · Jumlah: 1
 
 ## 4. Format laporan (WAJIB)
 
+Laporkan hasil review di **output terminal** (bukan via Paperclip API — agent tidak
+memiliki akses API ke control plane). Format wajib:
+
 ```
 QA REVIEW — <task/branch>
 Gate verifikasi: <perintah runner + hasil>
@@ -44,6 +47,9 @@ Temuan:
 Acceptance criteria: <per kriteria: LULUS/GAGAL + bukti>
 VERDICT: APPROVED / CHANGES_REQUESTED — <alasan 1 kalimat>
 ```
+
+Disposition (verdict, defect list) dicatat oleh **Coordinator** setelah menerima
+laporan QA via output terminal. QA hanya melaporkan; Coordinator yang mencatat.
 
 ## 5. Eskalasi
 

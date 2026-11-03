@@ -39,13 +39,22 @@ Profile OpenCode: `elas-developer` · Jumlah: 2–3 (lajur paralel terisolasi)
 
 ## 4. Format laporan (WAJIB)
 
+Laporkan hasil di **output terminal** (bukan via Paperclip API — agent tidak memiliki
+akses API ke control plane). Format wajib:
+
 ```
 implementation_summary: <1-3 kalimat>
 changed_files: <daftar file + jumlah baris>
 test_results: <perintah runner + hasil: pass/fail + exit code>
 known_limitations: <apa yang tidak dicakup>
 commit_hash_if_applicable: <hash>
+branch: <branch yang dipakai>
 ```
+
+Agent **tidak** mencatat disposition di Paperclip. Disposition (status issue, komentar
+bukti) dicatat oleh **Coordinator** setelah menerima laporan agent via output
+terminal. Agent hanya melaporkan; Coordinator yang memutuskan next step.
+
 Sertakan **branch** yang dipakai.
 
 ## 5. Eskalasi

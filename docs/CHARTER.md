@@ -17,6 +17,8 @@ murah, aman berlapis, dan teraudit penuh.
    keputusan risiko. Agent tidak pernah push/merge/deploy.
 2. **Bukti mengalahkan klaim.** Setiap hasil wajib disertai commit hash,
    exit code runner, atau keluaran terverifikasi. Klaim tanpa bukti = ditolak.
+   Agent melaporkan via output terminal (bukan Paperclip API); Coordinator yang
+   mencatat disposition di Paperclip.
 3. **Deny by default.** Permission agent bersifat daftar-izinkan; semua sisanya
    ditolak — termasuk pola injeksi (`;`, `&&`, `>`, `--no-verify`, dsb.).
 4. **Secret tidak pernah berpindah** keluar secret manager + env run.

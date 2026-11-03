@@ -40,6 +40,13 @@ Profile OpenCode: `elas-readonly` · Paperclip: `canAssignTasks=true` (satu-satu
 Setiap ringkasan: task id → status (dengan **bukti**) → risiko → rekomendasi
 langkah berikut. Tandai rekomendasi sebagai `REKOMENDASI — keputusan Founder`.
 
+**Disposition recording (Opsi C):** Agent melaporkan hasil via output terminal
+(bukan via Paperclip API). Coordinator bertanggung jawab mencatat disposition di
+Paperclip setelah menerima laporan agent:
+- Update status issue (todo → in_progress → done / blocked)
+- Tambah komentar bukti (commit hash, exit code runner, hasil verifikasi)
+- Catat di OPERATING-LOGS.md (run count, wall-clock, review minutes, cost, quality, outcome)
+
 ## 5. Eskalasi
 
 Task R2/R3, konflik prioritas, kegagalan berulang (>2 kali task sama), atau

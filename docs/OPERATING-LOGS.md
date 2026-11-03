@@ -9,7 +9,8 @@ Isi untuk setiap task pilot (M3) + ringkasan berkala.
 
 | Task ID | Project | Risk | Route (Paperclip / direct) | Model | Run count / review round | Wall-clock + review mnt | Cost | Quality (first pass? temuan QA) | Outcome | Alasan |
 |---------|---------|------|----------------------------|-------|--------------------------|------------------------|------|--------------------------------|---------|--------|
-| | | | | | | | | | | |
+| Pilot-01 | lfc | R0 | Paperclip | nemotron-3.5-super-vl-free | 1 run | ~25 min (model slow) + 0 review mnt | $0 (free) | first pass, runner RC=0 | ✅ Selesai (issue done) | Agent menambah test method, commit e7177a9, runner verify 65 tests pass |
+| Pilot-02 | lfc | R0 | Paperclip | nemotron-3.5-super-vl-free | 1 run | ~5 min + 0 review mnt | $0 (free) | first pass, runner RC=0 | ✅ Selesai (issue done) | Agent menambah test method, commit 41de129, runner verify 65 tests pass |
 
 Catatan pengisian:
 - **Review minutes** = waktu aktif manusia (membaca + memutuskan) per task —

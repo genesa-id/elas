@@ -1,0 +1,42 @@
+# ELAS — Template Task (wajib untuk Coordinator)
+# Salin struktur ini saat menyusun issue. Task TIDAK BOLEH masuk eksekusi
+# bila acceptance criteria / verifikasi belum jelas.
+task:
+  title: "<ringkas 1 baris>"
+  objective: "<hasil bisnis/teknis yang dicapai>"
+  project: "<nama project/repo>"
+  priority: "low | medium | high"
+  risk_level: "R0 | R1 | R2 | R3"        # R2/R3 = diskusi Founder DULU
+  protected_paths_touched: []             # harus kosong; bila terisi = stop
+
+references:
+  - "<file/bagian kode terkait>"
+
+context: |
+  <kondisi saat ini, masalah, perilaku yang diamati>
+
+scope:
+  included:
+    - "<perubahan yang diizinkan>"
+  excluded:
+    - "<perubahan yang TIDAK boleh>"
+
+dependencies: []
+
+acceptance_criteria:                       # WAJIB terukur/objektif
+  - "<mis. file docs/x.md ada dengan >= 30 baris>"
+  - "<mis. 3 test baru dengan assert eksak, semua lulus>"
+
+verification:
+  commands:
+    - "sudo /opt/elas/run-tests.sh test '<glob>'"
+    - "sudo /opt/elas/run-tests.sh typecheck"
+  expected: "<mis. exit 0, pass >= 3, fail 0>"
+
+report_format: |
+  implementation_summary / changed_files / test_results /
+  known_limitations / commit_hash_if_applicable
+
+notes_for_agent:
+  - "Kerjakan persis scope; laporkan blocker, jangan memaksa."
+  - "Jangan klaim 'test lulus' tanpa menjalankan runner (bukti = exit code)."

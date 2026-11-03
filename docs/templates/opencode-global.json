@@ -1,0 +1,179 @@
+{
+  "_comment": "ELAS — Global config OpenCode untuk user agent: ~/.config/opencode/opencode.json. SKEMA V1 WAJIB: key 'agent' TUNGGAL (bukan 'agents' — F10: dibuang diam-diam). 'edit'/'write'/'patch' diatur TERPISAH (F11). Deny injeksi DIPASANG PALING AKHIR (last-match-wins): ; && || | > < $( `. Perintah test HANYA via sudo /opt/elas/run-tests.sh (bukan npm run mentah). Model provider kustom wajib terdaftar di blok 'models' (F34). JANGAN salin config pribadi ke sini. Setiap perubahan = change-event tercatat.",
+  "$schema": "https://opencode.ai/config.json",
+  "share": "disabled",
+  "autoupdate": false,
+  "provider": {
+    "clinepass": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "ClinePass (langganan)",
+      "options": {
+        "baseURL": "https://api.cline.bot/api/v1",
+        "apiKey": "{env:CLINE_API_KEY}"
+      },
+      "models": {
+        "cline-pass/mimo-v2.6-pro": { "name": "MiMo V2.6 Pro (ClinePass)" },
+        "cline-pass/mimo-v2.6-flash": { "name": "MiMo V2.6 Flash (ClinePass)" },
+        "cline-pass/deepseek-v4.1-flash-1017": { "name": "DeepSeek V4.1 Flash (ClinePass)" }
+      }
+    }
+  },
+  "permission": {
+    "*": "deny",
+    "read": {
+      "*": "allow",
+      "**/.env": "deny",
+      "**/.env.*": "deny",
+      "**/.env.example": "allow",
+      "**/*.pem": "deny",
+      "**/*.key": "deny",
+      "**/secrets/**": "deny"
+    },
+    "glob": "allow",
+    "grep": "deny",
+    "list": "allow",
+    "edit": "deny",
+    "write": "deny",
+    "patch": "deny",
+    "bash": "deny",
+    "task": "deny",
+    "webfetch": "deny",
+    "websearch": "deny",
+    "external_directory": "deny",
+    "question": "deny",
+    "skill": "deny"
+  },
+  "agent": {
+    "elas-readonly": {
+      "description": "Coordinator & DevOps/Security — read-only penuh",
+      "mode": "primary",
+      "permission": {
+        "edit": "deny",
+        "write": "deny",
+        "patch": "deny",
+        "bash": {
+          "*": "deny",
+          "git status*": "allow",
+          "git log*": "allow",
+          "git diff*": "allow",
+          "git show*": "allow",
+          "git branch --show-current": "allow",
+          "ls*": "allow",
+          "*;*": "deny",
+          "*&&*": "deny",
+          "*||*": "deny",
+          "*|*": "deny",
+          "*>*": "deny",
+          "*<*": "deny",
+          "*$(*": "deny",
+          "*`*": "deny"
+        }
+      }
+    },
+    "elas-developer": {
+      "description": "Developer R0-R1 — edit di luar protected path; test via runner",
+      "mode": "primary",
+      "permission": {
+        "edit": {
+          "*": "allow",
+          ".github/**": "deny",
+          "opencode.json": "deny",
+          ".opencode/**": "deny",
+          "**/.env*": "deny",
+          "**/migrations/**": "deny",
+          "**/deploy*/**": "deny",
+          "scripts/**": "deny",
+          "docker/**": "deny",
+          "**/secrets/**": "deny"
+        },
+        "write": {
+          "*": "allow",
+          ".github/**": "deny",
+          "opencode.json": "deny",
+          ".opencode/**": "deny",
+          "**/.env*": "deny",
+          "**/migrations/**": "deny",
+          "**/deploy*/**": "deny",
+          "scripts/**": "deny",
+          "docker/**": "deny",
+          "**/secrets/**": "deny"
+        },
+        "patch": {
+          "*": "allow",
+          ".github/**": "deny",
+          "opencode.json": "deny",
+          ".opencode/**": "deny",
+          "**/.env*": "deny",
+          "**/migrations/**": "deny",
+          "**/deploy*/**": "deny",
+          "scripts/**": "deny",
+          "docker/**": "deny",
+          "**/secrets/**": "deny"
+        },
+        "bash": {
+          "*": "deny",
+          "git status*": "allow",
+          "git log*": "allow",
+          "git diff*": "allow",
+          "git show*": "allow",
+          "git add*": "allow",
+          "git commit*": "allow",
+          "git branch --show-current": "allow",
+          "git switch -c task/*": "allow",
+          "git checkout -b task/*": "allow",
+          "sudo /opt/elas/run-tests.sh test *": "allow",
+          "sudo /opt/elas/run-tests.sh typecheck": "allow",
+          "sudo /opt/elas/run-tests.sh lint": "allow",
+          "sudo /opt/elas/run-tests.sh reset-db": "allow",
+          "git commit --amend*": "deny",
+          "git commit*--amend*": "deny",
+          "git commit*--no-verify*": "deny",
+          "git commit*-n*": "deny",
+          "git push*": "deny",
+          "git config*": "deny",
+          "git remote*": "deny",
+          "git reset*": "deny",
+          "*;*": "deny",
+          "*&&*": "deny",
+          "*||*": "deny",
+          "*|*": "deny",
+          "*>*": "deny",
+          "*<*": "deny",
+          "*$(*": "deny",
+          "*`*": "deny"
+        }
+      }
+    },
+    "elas-qa": {
+      "description": "QA independen — read-only + runner untuk verifikasi",
+      "mode": "primary",
+      "permission": {
+        "edit": "deny",
+        "write": "deny",
+        "patch": "deny",
+        "bash": {
+          "*": "deny",
+          "git status*": "allow",
+          "git log*": "allow",
+          "git diff*": "allow",
+          "git show*": "allow",
+          "git branch --show-current": "allow",
+          "sudo /opt/elas/run-tests.sh verify": "allow",
+          "sudo /opt/elas/run-tests.sh test *": "allow",
+          "sudo /opt/elas/run-tests.sh typecheck": "allow",
+          "sudo /opt/elas/run-tests.sh lint": "allow",
+          "sudo /opt/elas/run-tests.sh selftest": "allow",
+          "sudo /opt/elas/run-tests.sh reset-db": "allow",
+          "*;*": "deny",
+          "*&&*": "deny",
+          "*||*": "deny",
+          "*|*": "deny",
+          "*>*": "deny",
+          "*<*": "deny",
+          "*$(*": "deny",
+          "*`*": "deny"
+        }
+      }
+    }
+  }
+}
